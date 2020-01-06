@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+<body>
+
+      <form>
+      <textarea></textarea>
+      </form>
+
+   <script>
+
+
+      // #1
+      const FormEvent = new EventTarget();
+
+      // #2
+      FormEvent.addEventListener('custom', e => {
+         if (e.detail.a == 14) {
+            alert('VVVVVVVVVVVVV');
+         }
+         console.log(e)
+      });
+
+      setTimeout(() => {
+         // #3
+         FormEvent.dispatchEvent(new CustomEvent('custom', {bubbles: true, detail: {a: 14, b: 168}}));
+      },1000)
+
+      setTimeout(() => {
+         // #3
+         FormEvent.dispatchEvent(new CustomEvent('custom', {bubbles: true, detail: {a: 11, b: 168}}));
+         // lub
+         // FormEvent.dispatchEvent(new Event('custom'))
+      }, 4000);
+
+
+      // #1
+      const obj = new EventTarget();
+
+      // #2
+      obj.addEventListener("cat", function(e) { console.log(e.detail) });
+
+      // #3 create and dispatch the event
+      var ev = new CustomEvent("cat", {
+         detail: {
+            hazcheeseburger: true
+         }
+      });
+
+      obj.dispatchEvent(ev);
+      
+   </script>
+</body>
+</html>
